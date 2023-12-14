@@ -1,0 +1,41 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+scalar BigInt
+scalar Uint64
+scalar Uint32
+
+type Block {
+  blockNum: BigInt!
+  blockHash: String!
+  blockTime: BigInt!
+  parentHash: String!
+  transactions: [String!]!
+  stable: Boolean!
+}
+
+type Blocks {
+  blocks: [Block!]!
+}
+
+type Log {
+  txHash: String!
+  index: Uint32!
+  data: String!
+}
+
+type Transaction {
+  txHash: String!
+  from: String!
+  to: String!
+  nonce: String!
+  data: String!
+  value: String!
+  logs: [Log!]!
+}
+
+type Query {
+  block(num: Uint64!): Block!
+  latestBlocks(num: Uint64!): Blocks!
+  transaction(txHash: String!): Transaction!
+}

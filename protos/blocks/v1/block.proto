@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package blocks.v1;
+
+option go_package = "github.com/0x726f6f6b6965/portto/protos/blocks/v1;v1";
+
+message GetBlockRequest {
+    uint64 id = 1;
+}
+
+message GetBlockResponse {
+    string block_num = 1;
+    string block_hash = 2;
+    string block_time = 3;
+    string parent_hash = 4;
+    repeated string transactions = 5;
+    bool stable = 6;
+}
+
+message GetLatestBlockListRequest {
+    uint64 limit = 1;
+}
+
+message GetLatestBlockListResponse {
+    repeated GetBlockResponse blocks = 1;
+}

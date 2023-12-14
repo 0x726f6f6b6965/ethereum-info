@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package transaction.v1;
+
+import "transaction/v1/transaction.proto";
+
+option go_package = "github.com/0x726f6f6b6965/portto/protos/transaction/v1;v1";
+
+
+service TransactionService {
+    // Get transaction by tx_hash
+    rpc GetTransaction(GetTransactionRequest) returns (GetTransactionResponse){};
+}

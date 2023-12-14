@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package transaction.v1;
+
+option go_package = "github.com/0x726f6f6b6965/portto/protos/transaction/v1;v1";
+
+message Log {
+    // hash of the transaction
+    string tx_hash = 1;
+    // index of the log in the block
+    uint32 index = 2;
+    // supplied by the contract, usually ABI-encoded
+    string data = 3;
+}
+
+message GetTransactionRequest {
+    string tx_hash = 1;
+}
+
+message GetTransactionResponse {
+    // hash of the transaction
+    string tx_hash = 1;
+    // the address who created the transaction
+    string from = 2;
+    // the address who interact with
+    string to = 3;
+    // the sender account nonce of the transaction.
+    string nonce = 4;
+    // the input data of the transaction.
+    string data = 5;
+    // the ether amount of the transaction.
+    string value = 6;
+    // log event
+    repeated Log logs =7;
+}

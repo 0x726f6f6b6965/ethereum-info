@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package blocks.v1;
+
+import "blocks/v1/block.proto";
+
+option go_package = "github.com/0x726f6f6b6965/portto/protos/blocks/v1;v1";
+
+service BlockService {
+    // Get block
+    rpc GetBlock(GetBlockRequest) returns (GetBlockResponse){};
+    // Get lastest block list
+    rpc GetLatestBlockList(GetLatestBlockListRequest) returns (GetLatestBlockListResponse){};
+}

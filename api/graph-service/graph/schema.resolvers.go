@@ -11,6 +11,7 @@ import (
 	"github.com/0x726f6f6b6965/ethereum-info/graph-service/internal/model"
 	pbBlock "github.com/0x726f6f6b6965/ethereum-info/protos/blocks/v1"
 	pbTrans "github.com/0x726f6f6b6965/ethereum-info/protos/transaction/v1"
+	"go.uber.org/zap"
 	"google.golang.org/protobuf/encoding/protojson"
 )
 
@@ -18,15 +19,18 @@ import (
 func (r *queryResolver) Block(ctx context.Context, num uint64) (*model.Block, error) {
 	resp, err := r.Blocks.GetBlock(ctx, &pbBlock.GetBlockRequest{Id: num})
 	if err != nil {
+		r.Log.Error("get block error", zap.Error(err))
 		return nil, err
 	}
 	b, err := protojson.Marshal(resp)
 	if err != nil {
+		r.Log.Error("get block marshal error", zap.Error(err))
 		return nil, err
 	}
 	result := &model.Block{}
 	err = json.Unmarshal(b, result)
 	if err != nil {
+		r.Log.Error("get block unmarshal error", zap.Error(err))
 		return nil, err
 	}
 	return result, nil
@@ -36,15 +40,18 @@ func (r *queryResolver) Block(ctx context.Context, num uint64) (*model.Block, er
 func (r *queryResolver) LatestBlocks(ctx context.Context, num uint64) (*model.Blocks, error) {
 	resp, err := r.Blocks.GetLatestBlockList(ctx, &pbBlock.GetLatestBlockListRequest{Limit: num})
 	if err != nil {
+		r.Log.Error("get block list error", zap.Error(err))
 		return nil, err
 	}
 	b, err := protojson.Marshal(resp)
 	if err != nil {
+		r.Log.Error("get block list marshal error", zap.Error(err))
 		return nil, err
 	}
 	result := &model.Blocks{}
 	err = json.Unmarshal(b, result)
 	if err != nil {
+		r.Log.Error("get block list unmarshal error", zap.Error(err))
 		return nil, err
 	}
 	return result, nil
@@ -54,15 +61,18 @@ func (r *queryResolver) LatestBlocks(ctx context.Context, num uint64) (*model.Bl
 func (r *queryResolver) Transaction(ctx context.Context, txHash string) (*model.Transaction, error) {
 	resp, err := r.Trans.GetTransaction(ctx, &pbTrans.GetTransactionRequest{TxHash: txHash})
 	if err != nil {
+		r.Log.Error("get transaction error", zap.Error(err))
 		return nil, err
 	}
 	b, err := protojson.Marshal(resp)
 	if err != nil {
+		r.Log.Error("get transaction marshal error", zap.Error(err))
 		return nil, err
 	}
 	result := &model.Transaction{}
 	err = json.Unmarshal(b, result)
 	if err != nil {
+		r.Log.Error("get transaction unmarshal error", zap.Error(err))
 		return nil, err
 	}
 	return result, nil

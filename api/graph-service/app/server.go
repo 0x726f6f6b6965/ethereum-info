@@ -14,15 +14,19 @@ import (
 	pbTrans "github.com/0x726f6f6b6965/ethereum-info/protos/transaction/v1"
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
-	"github.com/hashicorp/hcl/v2/hclsimple"
 	"github.com/joho/godotenv"
+	"gopkg.in/yaml.v3"
 )
 
 func main() {
 	godotenv.Load()
 	path := os.Getenv("CONFIG")
 	var cfg config.Config
-	err := hclsimple.DecodeFile(path, nil, &cfg)
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return
+	}
+	err = yaml.Unmarshal(data, &cfg)
 	if err != nil {
 		return
 	}

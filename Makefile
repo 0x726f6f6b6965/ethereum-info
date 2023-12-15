@@ -27,3 +27,17 @@ proto-all: proto-gen proto-lint proto-check-breaking
 .PHONY: proto-clean
 proto-clean: 
 	@find protos -type f -name "*.go" -delete
+
+## DB
+
+.PHONY: set-psql
+set-psql:
+	@docker run --name MyPostgres -d -p 5432:5432 \
+		-e POSTGRES_DB=$(POSTGRES_DB) \
+		-e POSTGRES_USER=$(POSTGRES_USER) \
+		-e POSTGRES_PASSWORD=$(POSTGRES_PASSWORD) \
+		--rm postgres:latest
+
+.PHONY: set-redis
+set-redis:
+	@docker run --name redis-lab -p 6379:6379 -d redis

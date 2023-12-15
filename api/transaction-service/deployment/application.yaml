@@ -1,10 +1,10 @@
 grpc:
   host: "localhost"
   network: "tpc"
-  port: 64535
+  port: 64532
 
 log:
-  service-name: "block-service"
+  service-name: "transaction-service"
   level: 1
   time-format: "2006-01-02T15:04:05Z07:00"
   timestamp-enabled: true

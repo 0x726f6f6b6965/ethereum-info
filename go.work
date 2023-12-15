@@ -3,6 +3,7 @@ go 1.21.5
 use (
 	./api/block-service
 	./api/graph-service
+	./api/transaction-service
 	./db
 	./library
 	./protos

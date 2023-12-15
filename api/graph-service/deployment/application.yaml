@@ -1,0 +1,21 @@
+rest:
+  host: "localhost"
+  port: 8866
+
+log:
+  service-name: "graph-service"
+  level: 1
+  time-format: "2006-01-02T15:04:05Z07:00"
+  timestamp-enabled: true
+
+clients:
+  block-svc:
+    host: "localhost"
+    grpc-network: "tcp"
+    grpc-port: 64535
+    connection-timeout: 30s
+  transaction-svc:
+    host: "localhost"
+    grpc-port: 64532
+    grpc-network: "tcp"
+    connection-timeout: 30s

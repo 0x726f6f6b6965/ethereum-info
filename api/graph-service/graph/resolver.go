@@ -4,6 +4,7 @@ package graph
 import (
 	pbBlock "github.com/0x726f6f6b6965/ethereum-info/protos/blocks/v1"
 	pbTrans "github.com/0x726f6f6b6965/ethereum-info/protos/transaction/v1"
+	"go.uber.org/zap"
 )
 
 // This file will not be regenerated automatically.
@@ -13,4 +14,5 @@ import (
 type Resolver struct {
 	Blocks pbBlock.BlockServiceClient
 	Trans  pbTrans.TransactionServiceClient
+	Log    *zap.Logger
 }

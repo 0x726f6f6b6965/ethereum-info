@@ -3,30 +3,30 @@
 package model
 
 type Block struct {
-	BlockNum     string   `json:"blockNum,omitempty" bson:"blockNum,omitempty"`
-	BlockHash    string   `json:"blockHash,omitempty" bson:"blockHash,omitempty"`
-	BlockTime    string   `json:"blockTime,omitempty" bson:"blockTime,omitempty"`
-	ParentHash   string   `json:"parentHash,omitempty" bson:"parentHash,omitempty"`
-	Transactions []string `json:"transactions,omitempty" bson:"transactions,omitempty"`
-	Stable       bool     `json:"stable,omitempty" bson:"stable,omitempty"`
+	BlockNum     string   `json:"blockNum"`
+	BlockHash    string   `json:"blockHash"`
+	BlockTime    string   `json:"blockTime"`
+	ParentHash   string   `json:"parentHash"`
+	Transactions []string `json:"transactions"`
+	Stable       bool     `json:"stable"`
 }
 
 type Blocks struct {
-	Blocks []*Block `json:"blocks,omitempty" bson:"blocks,omitempty"`
+	Blocks []*Block `json:"blocks"`
 }
 
 type Log struct {
-	TxHash string `json:"txHash,omitempty" bson:"txHash,omitempty"`
-	Index  uint32 `json:"index,omitempty" bson:"index,omitempty"`
-	Data   string `json:"data,omitempty" bson:"data,omitempty"`
+	TxHash string `json:"txHash"`
+	Index  uint32 `json:"index"`
+	Data   string `json:"data"`
 }
 
 type Transaction struct {
-	TxHash string `json:"txHash,omitempty" bson:"txHash,omitempty"`
-	From   string `json:"from,omitempty" bson:"from,omitempty"`
-	To     string `json:"to,omitempty" bson:"to,omitempty"`
-	Nonce  string `json:"nonce,omitempty" bson:"nonce,omitempty"`
-	Data   string `json:"data,omitempty" bson:"data,omitempty"`
-	Value  string `json:"value,omitempty" bson:"value,omitempty"`
-	Logs   []*Log `json:"logs,omitempty" bson:"logs,omitempty"`
+	TxHash string `json:"txHash"`
+	From   string `json:"from"`
+	To     string `json:"to"`
+	Nonce  string `json:"nonce"`
+	Data   string `json:"data"`
+	Value  string `json:"value"`
+	Logs   []*Log `json:"logs"`
 }

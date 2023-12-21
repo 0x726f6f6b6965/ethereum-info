@@ -88,6 +88,7 @@ func ParseTTransToPb(tx *dbTrans.TTransaction) *pbTrans.GetTransactionResponse {
 		Nonce:  strconv.FormatInt(tx.Nonce, 10),
 		Data:   Add0xPrefix(tx.Data),
 		Value:  tx.Value,
+		Stable: true,
 	}
 
 	if tx.R != nil {

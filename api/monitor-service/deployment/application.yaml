@@ -1,0 +1,46 @@
+log:
+  service-name: "monitor-service"
+  level: 1
+  time-format: "2006-01-02T15:04:05Z07:00"
+  timestamp-enabled: true
+
+db:
+  host: "localhost"
+  port: 5432
+  user: "postgres"
+  password: "docker"
+  db-name: "postgres"
+  ssl-mode: "disable"
+
+redis:
+  host: "localhost"
+  port: 6379
+  password: "pwd"
+  db: 0
+  max-retries: 3
+
+rpc:
+  servers:
+    - "https://data-seed-prebsc-2-s3.binance.org:8545"
+  connect-timeout: 30
+  retry: 3
+
+monitors:
+  stable:
+    go_block_num: 5
+    go_trans_num: 7
+    go_log_num: 5
+    go_recepits_num: 3
+    start_block: 35000000
+    roll_back: 30
+    save_block_num: 30
+    interval: 30s
+  unstable:
+    go_block_num: 5
+    go_trans_num: 7
+    go_log_num: 5
+    go_recepits_num: 3
+    start_block: 35000000
+    roll_back: 30
+    save_block_num: 30
+    interval: 60s

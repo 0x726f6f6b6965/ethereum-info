@@ -1,27 +1,20 @@
-module github.com/0x726f6f6b6965/ethereum-info/transaction-service
+module github.com/0x726f6f6b6965/ethereum-info/monitor-service
 
 go 1.21.5
-
-replace github.com/0x726f6f6b6965/ethereum-info/library => ../../library
-
-replace github.com/0x726f6f6b6965/ethereum-info/protos => ../../protos
-
-replace github.com/0x726f6f6b6965/ethereum-info/db => ../../db
 
 require (
 	github.com/0x726f6f6b6965/ethereum-info/db v0.0.0-00010101000000-000000000000
 	github.com/0x726f6f6b6965/ethereum-info/library v0.0.0-00010101000000-000000000000
-	github.com/0x726f6f6b6965/ethereum-info/protos v0.0.0-00010101000000-000000000000
 	github.com/ethereum/go-ethereum v1.13.5
 	github.com/joho/godotenv v1.5.1
 	github.com/redis/go-redis/v9 v9.3.0
 	github.com/volatiletech/sqlboiler/v4 v4.15.0
 	go.uber.org/zap v1.26.0
-	google.golang.org/grpc v1.60.0
 	gopkg.in/yaml.v2 v2.4.0
 )
 
 require (
+	github.com/0x726f6f6b6965/ethereum-info/protos v0.0.0-00010101000000-000000000000 // indirect
 	github.com/Microsoft/go-winio v0.6.1 // indirect
 	github.com/StackExchange/wmi v1.2.1 // indirect
 	github.com/bits-and-blooms/bitset v1.7.0 // indirect
@@ -60,6 +53,13 @@ require (
 	golang.org/x/tools v0.13.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20231212172506-995d672761c0 // indirect
+	google.golang.org/grpc v1.60.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
 	rsc.io/tmplfunc v0.0.3 // indirect
 )
+
+replace github.com/0x726f6f6b6965/ethereum-info/db => ../../db
+
+replace github.com/0x726f6f6b6965/ethereum-info/library => ../../library
+
+replace github.com/0x726f6f6b6965/ethereum-info/protos => ../../protos

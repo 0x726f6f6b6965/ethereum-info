@@ -31,5 +31,6 @@ message GetTransactionResponse {
     // the ether amount of the transaction.
     string value = 6;
     // log event
-    repeated Log logs =7;
+    repeated Log logs = 7;
+    bool stable = 8;
 }

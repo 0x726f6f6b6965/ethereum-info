@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"time"
 
 	dbTrans "github.com/0x726f6f6b6965/ethereum-info/db/repository"
 	"github.com/0x726f6f6b6965/ethereum-info/library/client"
@@ -34,6 +35,11 @@ func (s *server) GetTransaction(ctx context.Context, req *trans.GetTransactionRe
 		return nil, libGRPC.RequiredFieldErr("no tx hash", "tx_hash")
 	}
 	resp := &trans.GetTransactionResponse{}
+	// get stable data from redis
+	err := client.GetDatabyKey(ctx, s.redisClient, fmt.Sprintf(consts.TransactionStableDataKey, req.GetTxHash()), resp)
+	if err == nil {
+		return resp, nil
+	}
 	// get from db
 	mod := []qm.QueryMod{qm.Load(dbTrans.TTransactionRels.TXHashTLogs), dbTrans.TTransactionWhere.TXHash.EQ(req.TxHash)}
 	info, err := dbTrans.TTransactions(mod...).OneG(ctx)
@@ -84,6 +90,11 @@ func (s *server) GetTransaction(ctx context.Context, req *trans.GetTransactionRe
 		}
 	} else {
 		resp = helper.ParseTTransToPb(info)
+	}
+
+	if resp.Stable {
+		bytes, _ := json.Marshal(resp)
+		s.redisClient.Set(ctx, fmt.Sprintf(consts.TransactionStableDataKey, req.GetTxHash()), bytes, helper.GeneralDuration(5, 5, 10, time.Minute))
 	}
 	return resp, nil
 }

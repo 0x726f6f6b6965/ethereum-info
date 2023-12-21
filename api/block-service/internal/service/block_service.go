@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"math/big"
 	"strings"
+	"time"
 
 	"github.com/0x726f6f6b6965/ethereum-info/block-service/internal/consts"
 	dbTrans "github.com/0x726f6f6b6965/ethereum-info/db/repository"
@@ -35,6 +36,11 @@ func (s *server) GetBlock(ctx context.Context, req *blocks.GetBlockRequest) (*bl
 		return nil, libGRPC.RequiredFieldErr("no id", "id")
 	}
 	resp := &blocks.GetBlockResponse{}
+	// get stable data from redis
+	err := client.GetDatabyKey(ctx, s.redisClient, fmt.Sprintf(consts.BlockStableDataKey, req.GetId()), resp)
+	if err == nil {
+		return resp, nil
+	}
 	// get from db
 	mod := []qm.QueryMod{qm.Load(dbTrans.TBlockRels.BlockNumTTransactions), dbTrans.TBlockWhere.BlockNum.EQ(int64(req.Id))}
 	info, err := dbTrans.TBlocks(mod...).OneG(ctx)
@@ -81,6 +87,10 @@ func (s *server) GetBlock(ctx context.Context, req *blocks.GetBlockRequest) (*bl
 		resp.Stable = true
 	}
 
+	if resp.Stable {
+		bytes, _ := json.Marshal(resp)
+		s.redisClient.Set(ctx, fmt.Sprintf(consts.BlockStableDataKey, req.GetId()), bytes, helper.GeneralDuration(5, 5, 10, time.Minute))
+	}
 	return resp, nil
 }
 

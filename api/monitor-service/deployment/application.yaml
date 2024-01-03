@@ -5,7 +5,7 @@ log:
   timestamp-enabled: true
 
 db:
-  host: "localhost"
+  host: "db"
   port: 5432
   user: "postgres"
   password: "docker"
@@ -13,7 +13,7 @@ db:
   ssl-mode: "disable"
 
 redis:
-  host: "localhost"
+  host: "redis"
   port: 6379
   password: "pwd"
   db: 0

@@ -41,3 +41,20 @@ set-psql:
 .PHONY: set-redis
 set-redis:
 	@docker run --name redis-lab -p 6379:6379 -d redis
+
+## Dockerfile
+
+.PHONY: gen-images
+gen-images:
+	@docker build --tag transaction-service:$(TRANS_VERSION) -f ./api/transaction-service/deployment/Dockerfile .
+	@docker build --tag block-service:$(BLOCK_VERSION) -f ./api/block-service/deployment/Dockerfile .
+	@docker build --tag graph-service:$(REST_VERSION) -f ./api/graph-service/deployment/Dockerfile .
+	@docker build --tag monitor-service:$(MONITOR_VERSION) -f ./api/monitor-service/deployment/Dockerfile .
+
+.PHONY: service-up
+service-up:
+	@docker-compose up -d
+
+.PHONY: service-down
+service-down:
+	@docker-compose down

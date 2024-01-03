@@ -10,12 +10,12 @@ log:
 
 clients:
   block-svc:
-    host: "localhost"
+    host: "block-service"
     grpc-network: "tcp"
     grpc-port: 64535
     connection-timeout: 30s
   transaction-svc:
-    host: "localhost"
+    host: "transaction-service"
     grpc-port: 64532
     grpc-network: "tcp"
     connection-timeout: 30s

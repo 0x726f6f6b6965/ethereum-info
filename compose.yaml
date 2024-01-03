@@ -59,7 +59,7 @@ services:
     volumes:
       - ./api/graph-service/deployment/application.yaml:/app/project/application.yaml
     ports:
-      - ${REST_PORT}:${REST_PORT}
+      - 8866:8866
     depends_on:
       - db
       - redis
